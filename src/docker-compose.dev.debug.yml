@@ -1,0 +1,47 @@
+version: '2'
+
+services:
+  api:
+    image: registry.contoso.com/warranty/api:dev
+    build:
+      args:
+        source: Api/obj/Docker/empty/
+    labels:
+      - "com.microsoft.visualstudio.targetoperatingsystem=linux"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+    volumes:
+      - Api/:/app
+      - ~/.nuget/packages:/root/.nuget/packages:ro
+      - ~/clrdbg:/clrdbg:ro
+    entrypoint: tail -f /dev/null
+  pullclaims:
+    image: registry.contoso.com/warranty/pullclaims:dev
+    build:
+      args:
+        source: PullClaims/obj/Docker/empty/
+    labels:
+      - "com.microsoft.visualstudio.targetoperatingsystem=linux"
+    volumes:
+      - PullClaims/:/app
+      - ~/.nuget/packages:/root/.nuget/packages:ro
+      - ~/clrdbg:/clrdbg:ro
+    entrypoint: tail -f /dev/null
+  web:
+    image: registry.contoso.com/warranty/web:dev
+    build:
+      args:
+        source: Web/obj/Docker/empty/
+    labels:
+      - "com.microsoft.visualstudio.targetoperatingsystem=linux"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+    volumes:
+      - Web/:/app
+      - ~/.nuget/packages:/root/.nuget/packages:ro
+      - ~/clrdbg:/clrdbg:ro
+    entrypoint: tail -f /dev/null
+  redis:
+    image: redis

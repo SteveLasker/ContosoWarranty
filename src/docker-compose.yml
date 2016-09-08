@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  api:
+    image: registry.contoso.com/warranty/api
+    build:
+      context: /Api
+      dockerfile: Dockerfile
+    ports:
+      - "80"
+  pullclaims:
+    image: registry.contoso.com/warranty/pullclaims
+    build:
+      context: PullClaims/
+      dockerfile: Dockerfile
+  web:
+    image: registry.contoso.com/warranty/web
+    build:
+      context: Web/
+      dockerfile: Dockerfile
+    ports:
+      - "80"
