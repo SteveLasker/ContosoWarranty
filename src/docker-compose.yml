@@ -4,19 +4,19 @@ services:
   api:
     image: registry.contoso.com/warranty/api
     build:
-      context: /Api
+      context: /Api/bin/Release/PublishOutput
       dockerfile: Dockerfile
     ports:
       - "80"
   pullclaims:
     image: registry.contoso.com/warranty/pullclaims
     build:
-      context: PullClaims/
+      context: PullClaims/bin/Release/PublishOutput
       dockerfile: Dockerfile
   web:
     image: registry.contoso.com/warranty/web
     build:
-      context: Web/
+      context: Web/bin/Release/PublishOutput
       dockerfile: Dockerfile
     ports:
       - "80"
