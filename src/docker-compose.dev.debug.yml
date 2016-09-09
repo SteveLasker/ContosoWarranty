@@ -4,6 +4,7 @@ services:
   api:
     image: registry.contoso.com/warranty/api:dev
     build:
+      context: /Api/bin/Debug
       args:
         source: Api/obj/Docker/empty/
     labels:
@@ -19,6 +20,7 @@ services:
   pullclaims:
     image: registry.contoso.com/warranty/pullclaims:dev
     build:
+      context: /pullclaims/bin/Debug
       args:
         source: PullClaims/obj/Docker/empty/
     labels:
@@ -31,6 +33,7 @@ services:
   web:
     image: registry.contoso.com/warranty/web:dev
     build:
+      context: /web/bin/Debug
       args:
         source: Web/obj/Docker/empty/
     labels:
